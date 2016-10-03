@@ -30,7 +30,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
             </tr>
-            <tr ng-repeat="doctor in doctors">
+            <tr ng-repeat="doctor in doctorsList.doctors" ng-click="getDoctor(doctor)">
                 <td>{{ doctor.type }}</td>
                 <td>{{ doctor.firstName }}</td>
                 <td>{{ doctor.lastName }}</td>

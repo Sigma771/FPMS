@@ -30,7 +30,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
             </tr>
-            <tr ng-repeat="patient in patients">
+            <tr ng-repeat="patient in patientsList.patients" ng-click="getPatient(patient)">
                 <td>{{ patient.ssn }}</td>
                 <td>{{ patient.firstName }}</td>
                 <td>{{ patient.lastName }}</td>

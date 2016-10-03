@@ -23,7 +23,28 @@
         </ul>
     </nav>
 
-    <div id="content" class="contentMargins"></div>
+    <div id="content" class="contentMargins">
+        <form novalidate>
+            Type:<br>
+            <input type="text" ng-model="doctor.type">
+            First Name:<br>
+            <input type="text" ng-model="doctor.firstName">
+            Last Name:<br>
+            <input type="text" ng-model="doctor.lastName">
+            Address:<br>
+            <input type="text" ng-model="doctor.address">
+            City:<br>
+            <input type="text" ng-model="doctor.city">
+            State:<br>
+            <input type="text" ng-model="doctor.state">
+            Zip:<br>
+            <input type="text" ng-model="doctor.zip">
+            Phone Number:<br>
+            <input type="text" ng-model="doctor.phoneNumber">
+            <br><br>
+            <button ng-click="saveDoctor()">Save Patient Information</button>
+        </form>
+    </div>
 </div>
 
 <div id="layoutFooter">
