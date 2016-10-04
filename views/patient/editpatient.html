@@ -15,7 +15,7 @@
     <h3>(Family Physician Management System)</h3>
 </div>
 
-<div id="layoutBody" ng-app="mainApp">
+<div id="layoutBody" ng-app="mainApp" ng-controller = "editPatientController">
     <nav id="mainNavigation">
         <ul>
             <li><a href="../home/index.html">Home</a></li>
@@ -24,7 +24,36 @@
         </ul>
     </nav>
 
-    <div id="content" class="contentMargins"></div>
+    <div id="content" class="contentMargins">
+        <form novalidate>
+            Social Security Number:<br>
+            <input type="text" ng-model="patient.ssn"><br>
+            First Name:<br>
+            <input type="text" ng-model="patient.firstName"><br>
+            Last Name:<br>
+            <input type="text" ng-model="patient.lastName"><br>
+            Gender:<br>
+            <input type="text" ng-model="patient.gender"><br>
+            Address:<br>
+            <input type="text" ng-model="patient.address"><br>
+            City:<br>
+            <input type="text" ng-model="patient.city"><br>
+            State:<br>
+            <input type="text" ng-model="patient.state"><br>
+            Zip:<br>
+            <input type="text" ng-model="patient.zip"><br>
+            Phone Number:<br>
+            <input type="text" ng-model="patient.phoneNumber"><br>
+            Insurance Provider:<br>
+            <input type="text" ng-model="patient.insuranceProvider"><br>
+            Insurance Provider Number:<br>
+            <input type="text" ng-model="patient.insuranceProviderNumber"><br>
+            Physician:<br>
+            <input type="text" ng-model="patient.physician">
+            <br><br>
+            <button ng-click="savePatient()">Save Patient Information</button>
+        </form>
+    </div>
 </div>
 
 <div id="layoutFooter">

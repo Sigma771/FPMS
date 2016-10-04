@@ -12,6 +12,33 @@ mainApp.controller('patientController', function($scope){
     prepareLocalStorageObject();
 
     $scope.patientsList = getAllPatients();
+
+    $scope.addNewPatient = function(){
+        window.location.href = "../patient/newpatient.html";
+    };
+
+    $scope.editPatient = function(){
+        window.location.href = "../patient/editpatient.html";
+    };
+
+    $scope.getPatient = function(index){
+        var patient = $scope.patientsList.patients[index];
+
+        patientInfo.firstName = patient.firstName;
+        patientInfo.lastName = patient.lastName;
+        patientInfo.ssn = patient.ssn;
+        patientInfo.phoneNumber = patient.phoneNumber;
+        patientInfo.gender = patient.gender;
+        patientInfo.address = patient.address;
+        patientInfo.city = patient.city;
+        patientInfo.state = patient.state;
+        patientInfo.zip = patient.zip;
+        patientInfo.insuranceProvider = patient.InsuranceProvider;
+        patientInfo.insuranceProviderNumber = patient.insuranceProviderNumber;
+        patientInfo.physician = patient.physician;
+
+        localStorage.patientInfo = JSON.stringify(patientInfo);
+    }
 });
 
 mainApp.controller('newPatientController', function($scope){
@@ -32,8 +59,7 @@ mainApp.controller('newPatientController', function($scope){
 });
 
 mainApp.controller('editPatientController', function($scope){
-    $scope.master = {firstName: patientInfo.firstName, lastName: patientInfo.lastName, ssn: patientInfo.ssn, phoneNumber: patientInfo.phoneNumber, gender: patientInfo.gender, address: patientInfo.address, city: patientInfo.city,
-                     state: patientInfo.state, zip: patientInfo.zip, InsuranceProvider: patientInfo.InsuranceProvider, insuranceProviderNumber: patientInfo.insuranceProviderNumber, physician: patientInfo.physician};
+    $scope.master = JSON.parse(localStorage.patientInfo);
     $scope.patient = angular.copy($scope.master);
 });
 

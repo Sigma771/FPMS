@@ -30,12 +30,14 @@
                 <th>First Name</th>
                 <th>Last Name</th>
             </tr>
-            <tr ng-repeat="patient in patientsList.patients" ng-click="getPatient(patient)">
+            <tr ng-repeat="patient in patientsList.patients" ng-click="getPatient($index)">
                 <td>{{ patient.ssn }}</td>
                 <td>{{ patient.firstName }}</td>
                 <td>{{ patient.lastName }}</td>
             </tr>
         </table>
+        <button type="button" ng-click="addNewPatient()">Add New</button>
+        <button type="button" ng-click="editPatient()">Edit</button>
     </div>
 </div>
 
