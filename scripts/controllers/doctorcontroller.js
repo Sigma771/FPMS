@@ -32,25 +32,47 @@ mainApp.controller('doctorController', function($scope){
         doctorInfo.zip = doctor.zip;
 
         localStorage.doctorInfo = JSON.stringify(doctorInfo);
+        localStorage.selectedDoctorIndex = index;
     }
 });
 
 mainApp.controller('newDoctorController', function($scope){
+    if(localStorage.doctors !== JSON.stringify(doctorsArray)){
+        prepareLocalStorageObject();
+    }
+
     $scope.master = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
                      state: "", zip: ""};
     $scope.doctor = angular.copy($scope.master);
 
-    $scope.addNewDoctor = function(index){
+    $scope.saveDoctor = function() {
+        doctorsArray.doctors.push($scope.doctor);
 
-    };
-    $scope.form.firstName = function(){
-        
+        localStorage.doctors = JSON.stringify(doctorsArray); 
+
+        $scope.master = angular.copy($scope.doctor);
+
+        alert('Doctor Saved!!!');
     };
 });
 
 mainApp.controller('editDoctorController', function($scope){
+    if(localStorage.doctors !== JSON.stringify(doctorsArray)){
+        prepareLocalStorageObject();
+    }
+
     $scope.master = JSON.parse(localStorage.doctorInfo);
     $scope.doctor = angular.copy($scope.master);
+
+    $scope.saveDoctor = function() {
+        doctorsArray.doctors[localStorage.selectedDoctorIndex] = $scope.doctor;
+
+        localStorage.doctors = JSON.stringify(doctorsArray);
+         
+        $scope.master = angular.copy($scope.doctor);
+
+        alert('Doctor Saved!!!');
+    };
 });
 
 function prepareLocalStorageObject(){

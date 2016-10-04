@@ -49,7 +49,9 @@
             Insurance Provider Number:<br>
             <input type="text" ng-model="patient.insuranceProviderNumber"><br>
             Physician:<br>
-            <input type="text" ng-model="patient.physician">
+            <select ng-model="patient.physician">
+                <option ng-repeat="physician in physicians.doctors" value="{{physician.firstName}} {{physician.lastName}}">{{physician.firstName}} {{physician.lastName}}</option>
+            </select>
             <br><br>
             <button ng-click="savePatient()">Save Patient Information</button>
         </form>

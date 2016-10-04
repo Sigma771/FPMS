@@ -33,34 +33,56 @@ mainApp.controller('patientController', function($scope){
         patientInfo.city = patient.city;
         patientInfo.state = patient.state;
         patientInfo.zip = patient.zip;
-        patientInfo.insuranceProvider = patient.InsuranceProvider;
+        patientInfo.insuranceProvider = patient.insuranceProvider;
         patientInfo.insuranceProviderNumber = patient.insuranceProviderNumber;
         patientInfo.physician = patient.physician;
 
         localStorage.patientInfo = JSON.stringify(patientInfo);
+        localStorage.selectedPatientIndex = index;
     }
 });
 
 mainApp.controller('newPatientController', function($scope){
+    if(localStorage.patients !== JSON.stringify(patientsArray)){
+        prepareLocalStorageObject();
+    }
+
     $scope.master = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
-                     state: "", zip: "", InsuranceProvider: "", insuranceProviderNumber: "", physician: ""};
+                     state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
     $scope.patient = angular.copy($scope.master);
 
-    $scope.form.firstName = function(){
-        
-    };
-    $scope.form.doctorsList = function(){
-        return JSON.parse(localStorage.doctors);
-    };
+    $scope.physicians = JSON.parse(localStorage.doctors);
 
     $scope.savePatient = function() {
-        
+        patientsArray.patients.push($scope.patient);
+
+        localStorage.patients = JSON.stringify(patientsArray);
+
+        $scope.master = angular.copy($scope.patient);
+
+        alert('Patient Saved!!!');
     };
 });
 
 mainApp.controller('editPatientController', function($scope){
+    if(localStorage.patients !== JSON.stringify(patientsArray)){
+        prepareLocalStorageObject();
+    }
+
     $scope.master = JSON.parse(localStorage.patientInfo);
     $scope.patient = angular.copy($scope.master);
+
+    $scope.physicians = JSON.parse(localStorage.doctors);
+
+    $scope.savePatient = function() {
+        patientsArray.patients[localStorage.selectedPatientIndex] = $scope.patient;
+
+        localStorage.patients = JSON.stringify(patientsArray);
+
+        $scope.master = angular.copy($scope.patient);
+
+        alert('Patient Saved!!!');
+    };
 });
 
 function prepareLocalStorageObject(){
