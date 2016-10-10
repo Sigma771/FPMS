@@ -63,25 +63,27 @@ mainApp.controller('newDoctorController', function($scope){
     $scope.states = statesList;
 
     $scope.saveDoctor = function() {
-        var newDoctor = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
-                     state: "", zip: ""};
+        if ($scope.newDoctorForm.$valid) {
+            var newDoctor = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
+                        state: "", zip: ""};
 
-        newDoctor.firstName = $scope.doctor.firstName;
-        newDoctor.firstName = $scope.doctor.lastName;
-        newDoctor.firstName = $scope.doctor.phoneNumber;
-        newDoctor.firstName = $scope.doctor.type;
-        newDoctor.firstName = $scope.doctor.address;
-        newDoctor.firstName = $scope.doctor.city;
-        newDoctor.firstName = $scope.doctor.state.abbreviation;
-        newDoctor.firstName = $scope.doctor.zip;
+            newDoctor.firstName = $scope.doctor.firstName;
+            newDoctor.firstName = $scope.doctor.lastName;
+            newDoctor.firstName = $scope.doctor.phoneNumber;
+            newDoctor.firstName = $scope.doctor.type;
+            newDoctor.firstName = $scope.doctor.address;
+            newDoctor.firstName = $scope.doctor.city;
+            newDoctor.firstName = $scope.doctor.state.abbreviation;
+            newDoctor.firstName = $scope.doctor.zip;
 
-        doctorsArray.doctors.push(newDoctor);
+            doctorsArray.doctors.push(newDoctor);
 
-        localStorage.doctors = JSON.stringify(doctorsArray); 
+            localStorage.doctors = JSON.stringify(doctorsArray); 
 
-        $scope.master = angular.copy($scope.doctor);
+            $scope.master = angular.copy($scope.doctor);
 
-        alert('Doctor Saved!!!');
+            alert('Doctor Saved!!!');
+        }
     };
 });
 
@@ -103,25 +105,27 @@ mainApp.controller('editDoctorController', function($scope){
     }
 
     $scope.saveDoctor = function() {
-        var editedDoctor = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
-                     state: "", zip: ""};
+        if ($scope.editDoctorForm.$valid) {
+            var editedDoctor = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
+                        state: "", zip: ""};
 
-        editedDoctor.firstName = $scope.doctor.firstName;
-        editedDoctor.firstName = $scope.doctor.lastName;
-        editedDoctor.firstName = $scope.doctor.phoneNumber;
-        editedDoctor.firstName = $scope.doctor.type;
-        editedDoctor.firstName = $scope.doctor.address;
-        editedDoctor.firstName = $scope.doctor.city;
-        editedDoctor.firstName = $scope.doctor.state.abbreviation;
-        editedDoctor.firstName = $scope.doctor.zip;
+            editedDoctor.firstName = $scope.doctor.firstName;
+            editedDoctor.firstName = $scope.doctor.lastName;
+            editedDoctor.firstName = $scope.doctor.phoneNumber;
+            editedDoctor.firstName = $scope.doctor.type;
+            editedDoctor.firstName = $scope.doctor.address;
+            editedDoctor.firstName = $scope.doctor.city;
+            editedDoctor.firstName = $scope.doctor.state.abbreviation;
+            editedDoctor.firstName = $scope.doctor.zip;
 
-        doctorsArray.doctors[localStorage.selectedDoctorIndex] = editDoctor;
+            doctorsArray.doctors[localStorage.selectedDoctorIndex] = editDoctor;
 
-        localStorage.doctors = JSON.stringify(doctorsArray);
-         
-        $scope.master = angular.copy($scope.doctor);
+            localStorage.doctors = JSON.stringify(doctorsArray);
+            
+            $scope.master = angular.copy($scope.doctor);
 
-        alert('Doctor Saved!!!');
+            alert('Doctor Saved!!!');
+        }
     };
 });
 

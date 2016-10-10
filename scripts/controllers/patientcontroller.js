@@ -74,29 +74,31 @@ mainApp.controller('newPatientController', function($scope){
     $scope.states = statesList;
 
     $scope.savePatient = function() {
-        var newPatient = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
-                     state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
+        if ($scope.newPatientForm.$valid) {
+            var newPatient = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
+                        state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
 
-        newPatient.firstName = $scope.patient.firstName;
-        newPatient.lastName = $scope.patient.lastName;
-        newPatient.ssn = $scope.patient.ssn;
-        newPatient.phoneNumber = $scope.patient.phoneNumber;
-        newPatient.gender = $scope.patient.gender.name;
-        newPatient.address = $scope.patient.address;
-        newPatient.city = $scope.patient.city;
-        newPatient.state = $scope.patient.state.abbreviation;
-        newPatient.zip = $scope.patient.zip;
-        newPatient.insuranceProvider = $scope.patient.insuranceProvider;
-        newPatient.insuranceProviderNumber = $scope.patient.insuranceProviderNumber;
-        newPatient.physician = $scope.patient.physician.firstName + ' ' + $scope.patient.physician.lastName;
+            newPatient.firstName = $scope.patient.firstName;
+            newPatient.lastName = $scope.patient.lastName;
+            newPatient.ssn = $scope.patient.ssn;
+            newPatient.phoneNumber = $scope.patient.phoneNumber;
+            newPatient.gender = $scope.patient.gender.name;
+            newPatient.address = $scope.patient.address;
+            newPatient.city = $scope.patient.city;
+            newPatient.state = $scope.patient.state.abbreviation;
+            newPatient.zip = $scope.patient.zip;
+            newPatient.insuranceProvider = $scope.patient.insuranceProvider;
+            newPatient.insuranceProviderNumber = $scope.patient.insuranceProviderNumber;
+            newPatient.physician = $scope.patient.physician.firstName + ' ' + $scope.patient.physician.lastName;
 
-        patientsArray.patients.push(newPatient);
+            patientsArray.patients.push(newPatient);
 
-        localStorage.patients = JSON.stringify(patientsArray);
+            localStorage.patients = JSON.stringify(patientsArray);
 
-        $scope.master = angular.copy($scope.patient);
+            $scope.master = angular.copy($scope.patient);
 
-        alert('Patient Saved!!!');
+            alert('Patient Saved!!!');
+        }
     };
 });
 
@@ -107,6 +109,7 @@ mainApp.controller('editPatientController', function($scope){
 
     $scope.master = JSON.parse(localStorage.patientInfo);
     $scope.patient = angular.copy($scope.master);
+    $scope.ssnMaxlength = 11;
 
     $scope.physicians = JSON.parse(localStorage.doctors);
 
@@ -136,29 +139,31 @@ mainApp.controller('editPatientController', function($scope){
     }
 
     $scope.savePatient = function() {
-        var editedPatient = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
-                     state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
+        if ($scope.editPatientForm.$valid) {
+            var editedPatient = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
+                        state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
 
-        editedPatient.firstName = $scope.patient.firstName;
-        editedPatient.lastName = $scope.patient.lastName;
-        editedPatient.ssn = $scope.patient.ssn;
-        editedPatient.phoneNumber = $scope.patient.phoneNumber;
-        editedPatient.gender = $scope.patient.gender.name;
-        editedPatient.address = $scope.patient.address;
-        editedPatient.city = $scope.patient.city;
-        editedPatient.state = $scope.patient.state.abbreviation;
-        editedPatient.zip = $scope.patient.zip;
-        editedPatient.insuranceProvider = $scope.patient.insuranceProvider;
-        editedPatient.insuranceProviderNumber = $scope.patient.insuranceProviderNumber;
-        editedPatient.physician = $scope.patient.physician.firstName + ' ' + $scope.patient.physician.lastName;
+            editedPatient.firstName = $scope.patient.firstName;
+            editedPatient.lastName = $scope.patient.lastName;
+            editedPatient.ssn = $scope.patient.ssn;
+            editedPatient.phoneNumber = $scope.patient.phoneNumber;
+            editedPatient.gender = $scope.patient.gender.name;
+            editedPatient.address = $scope.patient.address;
+            editedPatient.city = $scope.patient.city;
+            editedPatient.state = $scope.patient.state.abbreviation;
+            editedPatient.zip = $scope.patient.zip;
+            editedPatient.insuranceProvider = $scope.patient.insuranceProvider;
+            editedPatient.insuranceProviderNumber = $scope.patient.insuranceProviderNumber;
+            editedPatient.physician = $scope.patient.physician.firstName + ' ' + $scope.patient.physician.lastName;
 
-        patientsArray.patients[localStorage.selectedPatientIndex] = editedPatient;
+            patientsArray.patients[localStorage.selectedPatientIndex] = editedPatient;
 
-        localStorage.patients = JSON.stringify(patientsArray);
+            localStorage.patients = JSON.stringify(patientsArray);
 
-        $scope.master = angular.copy($scope.patient);
+            $scope.master = angular.copy($scope.patient);
 
-        alert('Patient Saved!!!');
+            alert('Patient Saved!!!');
+        }
     };
 });
 
