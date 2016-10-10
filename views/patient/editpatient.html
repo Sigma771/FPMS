@@ -40,7 +40,8 @@
             City:<br>
             <input type="text" ng-model="patient.city"><br>
             State:<br>
-            <input type="text" ng-model="patient.state"><br>
+            <select ng-model="patient.state" ng-options="state.abbreviation for state in states.states" ng-init="patient.state = states.states[initialSelectedStateIndex]">
+            </select><br/>
             Zip:<br>
             <input type="text" ng-model="patient.zip"><br>
             Phone Number:<br>

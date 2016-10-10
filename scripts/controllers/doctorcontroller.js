@@ -1,4 +1,19 @@
 var mainApp = angular.module("mainApp", []);
+var statesList =  {"states" :[{"abbreviation": "AL"}, {"abbreviation": "AK"}, {"abbreviation": "AS"}, {"abbreviation": "AZ"},
+                            {"abbreviation": "AR"}, {"abbreviation": "CA"}, {"abbreviation": "CO"}, {"abbreviation": "CT"},
+                            {"abbreviation": "DE"}, {"abbreviation": "DC"}, {"abbreviation": "FM"},
+                            {"abbreviation": "FL"}, {"abbreviation": "GA"}, {"abbreviation": "GU"}, {"abbreviation": "HI"},
+                            {"abbreviation": "ID"}, {"abbreviation": "IL"}, {"abbreviation": "IN"}, {"abbreviation": "IA"},
+                            {"abbreviation": "KS"}, {"abbreviation": "KY"}, {"abbreviation": "LA"}, {"abbreviation": "ME"},
+                            {"abbreviation": "MH"}, {"abbreviation": "MD"}, {"abbreviation": "MA"}, {"abbreviation": "MI"},
+                            {"abbreviation": "MN"}, {"abbreviation": "MS"}, {"abbreviation": "MO"}, {"abbreviation": "MT"},
+                            {"abbreviation": "NE"}, {"abbreviation": "NV"}, {"abbreviation": "NH"}, {"abbreviation": "NJ"},
+                            {"abbreviation": "NM"}, {"abbreviation": "NY"}, {"abbreviation": "NC"}, {"abbreviation": "ND"},
+                            {"abbreviation": "MP"}, {"abbreviation": "OH"}, {"abbreviation": "OK"}, {"abbreviation": "OR"},
+                            {"abbreviation": "PW"}, {"abbreviation": "PA"}, {"abbreviation": "PR"}, {"abbreviation": "RI"},
+                            {"abbreviation": "SC"}, {"abbreviation": "SD"}, {"abbreviation": "TN"}, {"abbreviation": "TX"},
+                            {"abbreviation": "UT"}, {"abbreviation": "VT"}, {"abbreviation": "VI"}, {"abbreviation": "VA"},
+                            {"abbreviation": "WA"}, {"abbreviation": "WV"}, {"abbreviation": "WI"}, {"abbreviation": "WY"}]};
 var doctorsArray = {"doctors":[{"firstName":"Stephen", "lastName":"Strange", "phoneNumber":"317-987-6543", "address":"7586 West Main St", "city":"Gotham", "state":"NY", "zip":"11417", "type":"Family"},
                                 {"firstName":"Hank", "lastName":"Pym", "phoneNumber":"219-487-8888", "address":"7586 Column Ave", "city":"Louisville", "state":"KY", "zip":"40220", "type":"Family"},
                                 {"firstName":"Nathaniel", "lastName":"Essex", "phoneNumber":"219-487-8888", "address":"3245 Mystery St", "city":"Chicago", "state":"IL", "zip":"60608", "type":"Family"}]};
@@ -45,8 +60,22 @@ mainApp.controller('newDoctorController', function($scope){
                      state: "", zip: ""};
     $scope.doctor = angular.copy($scope.master);
 
+    $scope.states = statesList;
+
     $scope.saveDoctor = function() {
-        doctorsArray.doctors.push($scope.doctor);
+        var newDoctor = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
+                     state: "", zip: ""};
+
+        newDoctor.firstName = $scope.doctor.firstName;
+        newDoctor.firstName = $scope.doctor.lastName;
+        newDoctor.firstName = $scope.doctor.phoneNumber;
+        newDoctor.firstName = $scope.doctor.type;
+        newDoctor.firstName = $scope.doctor.address;
+        newDoctor.firstName = $scope.doctor.city;
+        newDoctor.firstName = $scope.doctor.state.abbreviation;
+        newDoctor.firstName = $scope.doctor.zip;
+
+        doctorsArray.doctors.push(newDoctor);
 
         localStorage.doctors = JSON.stringify(doctorsArray); 
 
@@ -64,8 +93,29 @@ mainApp.controller('editDoctorController', function($scope){
     $scope.master = JSON.parse(localStorage.doctorInfo);
     $scope.doctor = angular.copy($scope.master);
 
+    $scope.states = statesList;
+
+    for(var i = 0, len = $scope.states.states.length; i < len; i++) {
+        if ($scope.states.states[i].abbreviation == $scope.doctor.state) {
+            $scope.initialSelectedStateIndex = i;
+            break;
+        }
+    }
+
     $scope.saveDoctor = function() {
-        doctorsArray.doctors[localStorage.selectedDoctorIndex] = $scope.doctor;
+        var editedDoctor = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
+                     state: "", zip: ""};
+
+        editedDoctor.firstName = $scope.doctor.firstName;
+        editedDoctor.firstName = $scope.doctor.lastName;
+        editedDoctor.firstName = $scope.doctor.phoneNumber;
+        editedDoctor.firstName = $scope.doctor.type;
+        editedDoctor.firstName = $scope.doctor.address;
+        editedDoctor.firstName = $scope.doctor.city;
+        editedDoctor.firstName = $scope.doctor.state.abbreviation;
+        editedDoctor.firstName = $scope.doctor.zip;
+
+        doctorsArray.doctors[localStorage.selectedDoctorIndex] = editDoctor;
 
         localStorage.doctors = JSON.stringify(doctorsArray);
          

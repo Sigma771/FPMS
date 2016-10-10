@@ -1,4 +1,19 @@
 var mainApp = angular.module("mainApp", []);
+var statesList =  {"states" :[{"abbreviation": "AL"}, {"abbreviation": "AK"}, {"abbreviation": "AS"}, {"abbreviation": "AZ"},
+                            {"abbreviation": "AR"}, {"abbreviation": "CA"}, {"abbreviation": "CO"}, {"abbreviation": "CT"},
+                            {"abbreviation": "DE"}, {"abbreviation": "DC"}, {"abbreviation": "FM"},
+                            {"abbreviation": "FL"}, {"abbreviation": "GA"}, {"abbreviation": "GU"}, {"abbreviation": "HI"},
+                            {"abbreviation": "ID"}, {"abbreviation": "IL"}, {"abbreviation": "IN"}, {"abbreviation": "IA"},
+                            {"abbreviation": "KS"}, {"abbreviation": "KY"}, {"abbreviation": "LA"}, {"abbreviation": "ME"},
+                            {"abbreviation": "MH"}, {"abbreviation": "MD"}, {"abbreviation": "MA"}, {"abbreviation": "MI"},
+                            {"abbreviation": "MN"}, {"abbreviation": "MS"}, {"abbreviation": "MO"}, {"abbreviation": "MT"},
+                            {"abbreviation": "NE"}, {"abbreviation": "NV"}, {"abbreviation": "NH"}, {"abbreviation": "NJ"},
+                            {"abbreviation": "NM"}, {"abbreviation": "NY"}, {"abbreviation": "NC"}, {"abbreviation": "ND"},
+                            {"abbreviation": "MP"}, {"abbreviation": "OH"}, {"abbreviation": "OK"}, {"abbreviation": "OR"},
+                            {"abbreviation": "PW"}, {"abbreviation": "PA"}, {"abbreviation": "PR"}, {"abbreviation": "RI"},
+                            {"abbreviation": "SC"}, {"abbreviation": "SD"}, {"abbreviation": "TN"}, {"abbreviation": "TX"},
+                            {"abbreviation": "UT"}, {"abbreviation": "VT"}, {"abbreviation": "VI"}, {"abbreviation": "VA"},
+                            {"abbreviation": "WA"}, {"abbreviation": "WV"}, {"abbreviation": "WI"}, {"abbreviation": "WY"}]};
 var patientsArray = {"patients":[{"firstName":"Bruce", "lastName":"Wayne", "ssn":"111-11-1111", "phoneNumber":"317-123-4567", "gender":"Male", "address":"1234 Wayne Manor", "city":"Gotham", 
                                   "state":"NY", "zip":"11417", "insuranceProvider":"Blue Cross Blue Shield", "insuranceProviderNumber":"PN1234567", "physician":""},
                                  {"firstName":"John", "lastName":"Smith", "ssn":"222-22-2222", "phoneNumber":"317-234-5678", "gender":"Non-Binary", "address":"4321 Main St", "city":"Louisville", 
@@ -56,6 +71,8 @@ mainApp.controller('newPatientController', function($scope){
 
     $scope.genders = genderList;
 
+    $scope.states = statesList;
+
     $scope.savePatient = function() {
         var newPatient = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
                      state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
@@ -67,7 +84,7 @@ mainApp.controller('newPatientController', function($scope){
         newPatient.gender = $scope.patient.gender.name;
         newPatient.address = $scope.patient.address;
         newPatient.city = $scope.patient.city;
-        newPatient.state = $scope.patient.state;
+        newPatient.state = $scope.patient.state.abbreviation;
         newPatient.zip = $scope.patient.zip;
         newPatient.insuranceProvider = $scope.patient.insuranceProvider;
         newPatient.insuranceProviderNumber = $scope.patient.insuranceProviderNumber;
@@ -109,6 +126,15 @@ mainApp.controller('editPatientController', function($scope){
         }
     }
 
+    $scope.states = statesList;
+
+    for(var i = 0, len = $scope.states.states.length; i < len; i++) {
+        if ($scope.states.states[i].abbreviation == $scope.patient.state) {
+            $scope.initialSelectedStateIndex = i;
+            break;
+        }
+    }
+
     $scope.savePatient = function() {
         var editedPatient = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
                      state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
@@ -120,7 +146,7 @@ mainApp.controller('editPatientController', function($scope){
         editedPatient.gender = $scope.patient.gender.name;
         editedPatient.address = $scope.patient.address;
         editedPatient.city = $scope.patient.city;
-        editedPatient.state = $scope.patient.state;
+        editedPatient.state = $scope.patient.state.abbreviation;
         editedPatient.zip = $scope.patient.zip;
         editedPatient.insuranceProvider = $scope.patient.insuranceProvider;
         editedPatient.insuranceProviderNumber = $scope.patient.insuranceProviderNumber;
