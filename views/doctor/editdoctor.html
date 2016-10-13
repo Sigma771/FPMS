@@ -27,50 +27,50 @@
         <form name="editDoctorForm" novalidate>
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.type.$invalid && !editDoctorForm.type.$pristine }">
             <label>Type:</label><br>
-            <input name="type" type="text" ng-model="doctor.type">
+            <input name="type" type="text" class="form-control" ng-model="doctor.type">
             <p ng-show="editDoctorForm.type.$invalid && !editDoctorForm.type.$pristine" class="help-block">The doctor type required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.firstName.$invalid && !editDoctorForm.firstName.$pristine }">
             <label>First Name:</label><br>
-            <input name="firstName" type="text" ng-model="doctor.firstName">
+            <input name="firstName" type="text" class="form-control" ng-model="doctor.firstName">
             <p ng-show="editDoctorForm.firstName.$invalid && !editDoctorForm.firstName.$pristine" class="help-block">The first name required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.lastName.$invalid && !editDoctorForm.lastName.$pristine }">
             <label>Last Name:</label><br>
-            <input name="lastName" type="text" ng-model="doctor.lastName">
+            <input name="lastName" type="text" class="form-control" ng-model="doctor.lastName">
             <p ng-show="editDoctorForm.lastName.$invalid && !editDoctorForm.lastName.$pristine" class="help-block">The last name required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.address.$invalid && !editDoctorForm.address.$pristine }">
             <label>Address:</label><br>
-            <input name="address" type="text" ng-model="doctor.address">
+            <input name="address" type="text" class="form-control" ng-model="doctor.address">
             <p ng-show="editDoctorForm.address.$invalid && !editDoctorForm.address.$pristine" class="help-block">The address is required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.city.$invalid && !editDoctorForm.city.$pristine }">
             <label>City:</label><br>
-            <input name="city" type="text" ng-model="doctor.city">
+            <input name="city" type="text" class="form-control" ng-model="doctor.city">
             <p ng-show="editDoctorForm.city.$invalid && !editDoctorForm.city.$pristine" class="help-block">The city is required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.state.$invalid && !editDoctorForm.state.$pristine }">
             <label>State:</label><br>
-            <select name="state" ng-model="doctor.state" ng-options="state.abbreviation for state in states.states" ng-init="doctor.state = states.states[initialSelectedStateIndex]">
+            <select name="state" class="form-control" ng-model="doctor.state" ng-options="state.abbreviation for state in states.states" ng-init="doctor.state = states.states[initialSelectedStateIndex]">
             </select>
             <p ng-show="editDoctorForm.state.$error.required" class="help-block">the state is required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.zip.$invalid && !editDoctorForm.zip.$pristine }">
             <label>Zip:</label><br>
-            <input name="zip" type="text" ng-model="doctor.zip">
+            <input name="zip" type="text" class="form-control" ng-model="doctor.zip">
             <p ng-show="editDoctorForm.zip.$invalid && !editDoctorForm.zip.$pristine" class="help-block">The zip code is required.</p>
             </div>
             
             <div class="form-group" ng-class="{ 'has-error' : editDoctorForm.phoneNumber.$invalid && !editDoctorForm.phoneNumber.$pristine }">
             <label>Phone Number:</label><br>
-            <input name="phoneNumber" type="text" ng-model="doctor.phoneNumber">
+            <input name="phoneNumber" type="text" class="form-control phoneNumberFormatting" maxlength="13" ng-model="doctor.phoneNumber">
             <p ng-show="editDoctorForm.phoneNumber.$invalid && !editDoctorForm.phoneNumber.$pristine" class="help-block">The phone number is required.</p>
             </div>
             
