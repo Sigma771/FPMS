@@ -22,6 +22,7 @@ var doctorInfo = {firstName: "", lastName: "", phoneNumber: "", type: "", addres
 var doctorIndex;
 
 mainApp.controller('doctorController', function($scope){
+    $scope.userName = localStorage.userName;
     prepareLocalStorageObject();
 
     $scope.doctorsList = getAllDoctors();
@@ -49,9 +50,29 @@ mainApp.controller('doctorController', function($scope){
         localStorage.doctorInfo = JSON.stringify(doctorInfo);
         localStorage.selectedDoctorIndex = index;
     }
+
+    $scope.isReceptionist = function(){
+        if(localStorage.isReceptionist == "true"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    $scope.logout = function(){
+        localStorage.userAuthorized = "false";
+        localStorage.isDoctor = "false";
+        localStorage.isNurse = "false";
+        localStorage.isReceptionist = "false";
+
+        window.location.href = "../account/login.html";
+    };
 });
 
 mainApp.controller('newDoctorController', function($scope){
+    $scope.userName = localStorage.userName;
+
     if(localStorage.doctors !== JSON.stringify(doctorsArray)){
         prepareLocalStorageObject();
     }
@@ -59,6 +80,8 @@ mainApp.controller('newDoctorController', function($scope){
     $scope.master = {firstName: "", lastName: "", phoneNumber: "", type: "", address: "", city: "",
                      state: "", zip: ""};
     $scope.doctor = angular.copy($scope.master);
+    $scope.zipMaxlength = 5;
+    $scope.phoneMaxlength = 13;
 
     $scope.states = statesList;
 
@@ -85,15 +108,28 @@ mainApp.controller('newDoctorController', function($scope){
             alert('Doctor Saved!!!');
         }
     };
+
+    $scope.logout = function(){
+        localStorage.userAuthorized = "false";
+        localStorage.isDoctor = "false";
+        localStorage.isNurse = "false";
+        localStorage.isReceptionist = "false";
+
+        window.location.href = "../account/login.html";
+    };
 });
 
 mainApp.controller('editDoctorController', function($scope){
+    $scope.userName = localStorage.userName;
+
     if(localStorage.doctors !== JSON.stringify(doctorsArray)){
         prepareLocalStorageObject();
     }
 
     $scope.master = JSON.parse(localStorage.doctorInfo);
     $scope.doctor = angular.copy($scope.master);
+    $scope.zipMaxlength = 5;
+    $scope.phoneMaxlength = 13;
 
     $scope.states = statesList;
 
@@ -126,6 +162,15 @@ mainApp.controller('editDoctorController', function($scope){
 
             alert('Doctor Saved!!!');
         }
+    };
+
+    $scope.logout = function(){
+        localStorage.userAuthorized = "false";
+        localStorage.isDoctor = "false";
+        localStorage.isNurse = "false";
+        localStorage.isReceptionist = "false";
+
+        window.location.href = "../account/login.html";
     };
 });
 

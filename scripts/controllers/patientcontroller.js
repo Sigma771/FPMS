@@ -25,6 +25,7 @@ var patientInfo = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender
                      state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
 
 mainApp.controller('patientController', function($scope){
+    $scope.userName = localStorage.userName;
     prepareLocalStorageObject();
 
     $scope.patientsList = getAllPatients();
@@ -56,9 +57,20 @@ mainApp.controller('patientController', function($scope){
         localStorage.patientInfo = JSON.stringify(patientInfo);
         localStorage.selectedPatientIndex = index;
     }
+
+    $scope.logout = function(){
+        localStorage.userAuthorized = "false";
+        localStorage.isDoctor = "false";
+        localStorage.isNurse = "false";
+        localStorage.isReceptionist = "false";
+
+        window.location.href = "../account/login.html";
+    };
 });
 
 mainApp.controller('newPatientController', function($scope){
+    $scope.userName = localStorage.userName;
+
     if(localStorage.patients !== JSON.stringify(patientsArray)){
         prepareLocalStorageObject();
     }
@@ -66,6 +78,9 @@ mainApp.controller('newPatientController', function($scope){
     $scope.master = {firstName: "", lastName: "", ssn: "", phoneNumber: "", gender: "", address: "", city: "",
                      state: "", zip: "", insuranceProvider: "", insuranceProviderNumber: "", physician: ""};
     $scope.patient = angular.copy($scope.master);
+    $scope.ssnMaxlength = 11;
+    $scope.zipMaxlength = 5;
+    $scope.phoneMaxlength = 13;
 
     $scope.physicians = JSON.parse(localStorage.doctors);
 
@@ -100,9 +115,20 @@ mainApp.controller('newPatientController', function($scope){
             alert('Patient Saved!!!');
         }
     };
+
+    $scope.logout = function(){
+        localStorage.userAuthorized = "false";
+        localStorage.isDoctor = "false";
+        localStorage.isNurse = "false";
+        localStorage.isReceptionist = "false";
+
+        window.location.href = "../account/login.html";
+    };
 });
 
 mainApp.controller('editPatientController', function($scope){
+    $scope.userName = localStorage.userName;
+
     if(localStorage.patients !== JSON.stringify(patientsArray)){
         prepareLocalStorageObject();
     }
@@ -110,6 +136,8 @@ mainApp.controller('editPatientController', function($scope){
     $scope.master = JSON.parse(localStorage.patientInfo);
     $scope.patient = angular.copy($scope.master);
     $scope.ssnMaxlength = 11;
+    $scope.zipMaxlength = 5;
+    $scope.phoneMaxlength = 13;
 
     $scope.physicians = JSON.parse(localStorage.doctors);
 
@@ -164,6 +192,15 @@ mainApp.controller('editPatientController', function($scope){
 
             alert('Patient Saved!!!');
         }
+    };
+
+    $scope.logout = function(){
+        localStorage.userAuthorized = "false";
+        localStorage.isDoctor = "false";
+        localStorage.isNurse = "false";
+        localStorage.isReceptionist = "false";
+
+        window.location.href = "../account/login.html";
     };
 });
 
