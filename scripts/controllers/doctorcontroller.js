@@ -51,6 +51,14 @@ mainApp.controller('doctorController', function($scope){
         localStorage.selectedDoctorIndex = index;
     }
 
+    $scope.deleteDoctor = function(){
+        $scope.doctorsList.doctors.splice(localStorage.selectedDoctorIndex, 1);
+
+        doctorsArray = $scope.doctorsList;
+        localStorage.doctors = JSON.stringify(doctorsArray);
+        localStorage.selectedDoctorIndex = '';
+    }
+
     $scope.isReceptionist = function(){
         if(localStorage.isReceptionist == "true"){
             return true;
